@@ -42,11 +42,15 @@ fcomp() {
 cpu_load_status() {
 	local percentage=$1
 	if fcomp 80 $percentage; then
-		echo "high"
-	elif fcomp 30 $percentage && fcomp $percentage 80; then 
-		echo "medium"
+		echo "l4"
+	elif fcomp 60 $percentage; then
+		echo "l3"
+	elif fcomp 40 $percentage; then
+		echo "l2"
+    elif fcomp 20 $percentage; then
+		echo "l1"
 	else
-		echo "low"
+		echo "l0"
 	fi
 }
 

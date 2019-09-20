@@ -4,29 +4,39 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source "$CURRENT_DIR/helpers.sh"
 
-cpu_low_bg_color=""
-cpu_medium_bg_color=""
-cpu_high_bg_color=""
+cpu_l0_bg_color=""
+cpu_l1_bg_color=""
+cpu_l2_bg_color=""
+cpu_l3_bg_color=""
+cpu_l4_bg_color=""
 
-cpu_low_default_bg_color="#[bg=green]"
-cpu_medium_default_bg_color="#[bg=yellow]"
-cpu_high_default_bg_color="#[bg=red]"
+cpu_l0_default_bg_color="#[bg=#30ff30] "
+cpu_l1_default_bg_color="#[bg=#d9ff66] "
+cpu_l2_default_bg_color="#[bg=#ffd500] "
+cpu_l3_default_bg_color="#[bg=#ff7700] "
+cpu_l4_default_bg_color="#[bg=#ff0000] "
 
 get_bg_color_settings() {
-	cpu_low_bg_color=$(get_tmux_option "@cpu_low_bg_color" "$cpu_low_default_bg_color")
-	cpu_medium_bg_color=$(get_tmux_option "@cpu_medium_bg_color" "$cpu_medium_default_bg_color")
-	cpu_high_bg_color=$(get_tmux_option "@cpu_high_bg_color" "$cpu_high_default_bg_color")
+	cpu_l0_bg_color=$(get_tmux_option "@cpu_l0_bg_color" "$cpu_l0_default_bg_color")
+ 	cpu_l1_bg_color=$(get_tmux_option "@cpu_l1_bg_color" "$cpu_l1_default_bg_color")
+	cpu_l2_bg_color=$(get_tmux_option "@cpu_l2_bg_color" "$cpu_l2_default_bg_color")
+	cpu_l3_bg_color=$(get_tmux_option "@cpu_l3_bg_color" "$cpu_l3_default_bg_color")
+	cpu_l4_bg_color=$(get_tmux_option "@cpu_l4_bg_color" "$cpu_l4_default_bg_color")
 }
 
 print_bg_color() {
 	local cpu_percentage=$($CURRENT_DIR/cpu_percentage.sh | sed -e 's/%//')
 	local cpu_load_status=$(cpu_load_status $cpu_percentage)
-	if [ $cpu_load_status == "low" ]; then
-		echo "$cpu_low_bg_color"
-	elif [ $cpu_load_status == "medium" ]; then
-		echo "$cpu_medium_bg_color"
-	elif [ $cpu_load_status == "high" ]; then
-		echo "$cpu_high_bg_color"
+	if [ $cpu_load_status == "l0" ]; then
+		echo "$cpu_l0_bg_color"
+	elif [ $cpu_load_status == "l1" ]; then
+		echo "$cpu_l1_bg_color"
+	elif [ $cpu_load_status == "l2" ]; then
+		echo "$cpu_l2_bg_color"
+	elif [ $cpu_load_status == "l3" ]; then
+		echo "$cpu_l3_bg_color"
+	elif [ $cpu_load_status == "l4" ]; then
+		echo "$cpu_l4_bg_color"
 	fi
 }
 
